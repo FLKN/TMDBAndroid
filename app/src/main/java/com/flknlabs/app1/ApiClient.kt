@@ -14,7 +14,4 @@ class ApiClient {
         .build()
 
     var movieDatabaseAPI: ApiService = retrofit.create(ApiService::class.java)
-
-
-
 }
