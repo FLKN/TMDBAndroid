@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import retrofit2.Call
@@ -17,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var imageView: ImageView
     lateinit var overview : TextView
     lateinit var releaseDate : TextView
+    lateinit var titulo : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         imageView = findViewById<ImageView>(R.id.imgPoster)
         overview = findViewById<TextView>(R.id.tvOverview)
         releaseDate = findViewById<TextView>(R.id.tvReleaseDate)
+        titulo = findViewById<TextView>(R.id.tvTitulo)
 
     }
 
@@ -51,7 +56,8 @@ class MainActivity : AppCompatActivity() {
                 val json = Gson().toJson(response.body())
                 Log.d("MainActivity", "Response: $json")
                 loadImage(response.body()?.poster_path ?: "")
-                llenarInfo(response.body()?.overview?:"", response.body()?.release_date?:"")
+                llenarInfo(response.body()?.overview?:"", response.body()?.release_date?:"", response.body()?.original_title?:"")
+                llenarRatingBar(response.body()?.vote_average?:0.0)
 
             }
 
@@ -62,10 +68,16 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun llenarInfo(overview : String, releaseDate : String) {
+    private fun llenarRatingBar(voteAverage: Double) {
+        val rvstar = findViewById<RatingBar>(R.id.rbStar)
+        rvstar.rating = voteAverage.toFloat()
+    }
+
+    private fun llenarInfo(overview : String, releaseDate : String, title : String) {
 
 
         this.overview.text = overview
         this.releaseDate.text =  releaseDate
+        this.titulo.text = title
     }
 }
