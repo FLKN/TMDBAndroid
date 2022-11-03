@@ -2,4 +2,13 @@
 <resources>
     <dimen name="standard_margin">14dp</dimen>
     <dimen name="myString_xxhdpi">16sp</dimen>
+    <dimen name="match_constraint">0dp</dimen>
+    <dimen name="density128">128dp</dimen>
+    <dimen name="density200">200dp</dimen>
+    <dimen name="density16">16dp</dimen>
+    <dimen name="density8">8dp</dimen>
+    <dimen name="density4">4dp</dimen>
+    <dimen name="scaleable18">18sp</dimen>
+    <dimen name="scaleable12">12sp</dimen>
+    <dimen name="scaleable14">14sp</dimen>
 </resources>

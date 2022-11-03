@@ -5,6 +5,7 @@ data class BaseResponse (
     val homepage : String,
     val id : Int,
     val imdb_id : String,
+    val backdrop_path : String,
     val original_language : String,
     val original_title : String,
     val overview : String,
