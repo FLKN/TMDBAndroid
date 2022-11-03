@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">App1</string>
     <string name="hello_world">Este es un ejemplo de localización</string>
+
+    <!-- Layout - Movie Description Activity -->
+    <string name="loadContent" translatable="false">*Waiting content*</string>
+    <string name="descriptionMovie" translatable="false">Description</string>
+    <string name="releaseDateMovie" translatable="false">Release Date: </string>
+    <string name="languageMovie" translatable="false">Language: </string>
+    <string name="popularityMovie" translatable="false">Popularity: </string>
+    <string name="genresMovie" translatable="false">Genres: </string>
+    <string name="adultMovie" translatable="false">Age: </string>
+    <string name="durationMovie" translatable="false">Duration: </string>
+    <string name="voteMovie" translatable="false">Vote Average: </string>
+    <string name="leaveRate" translatable="false">Rate the movie: </string>
 </resources>

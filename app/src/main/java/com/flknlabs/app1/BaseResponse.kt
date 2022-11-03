@@ -1,10 +1,12 @@
 package com.flknlabs.app1
 
 data class BaseResponse (
+    val backdrop_path: String,
     val genres : List<Genres>,
     val homepage : String,
     val id : Int,
     val imdb_id : String,
+    val runtime: Int,
     val original_language : String,
     val original_title : String,
     val overview : String,
