@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">App1</string>
     <string name="hello_world">Este es un ejemplo de localización</string>
+    <string name="tvTitleMovie">Title of Movie</string>
+    <string name="tvDateMovie">17/06/1998</string>
+    <string name="titleGenres">Genres:</string>
+    <string name="tvGenresMovie">Action</string>
+    <string name="titleResume">Resume:</string>
+    <string name="tvResumeMovie">Description of Movie</string>
+    <string name="tvLanguageMovie">Languages</string>
+    <string name="tvHomepageMovie">Homepage: </string>
+    <string name="btnTrailer">Trailer</string>
 </resources>
