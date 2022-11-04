@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="#020D22"
     android:orientation="vertical">
 
@@ -165,15 +170,19 @@
         android:id="@+id/btnTrailer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnTrailer"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:fontFamily="sans-serif-black"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/teal_200"
         android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/btnTrailer"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHomepageMovie"
-        android:focusable="true" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHomepageMovie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
