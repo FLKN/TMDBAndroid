@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,29 +63,33 @@ class MainActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<BaseResponse> {
             override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                val json = Gson().toJson(response.body())
-                Log.d("MainActivity", "Response: $json")
-                val movie = response.body()
-                loadImage(movie?.poster_path ?: "", imagePoster)
-                loadImage(movie?.backdrop_path ?: "", imageBack, "H")
-                tvTitle.text = movie?.title
-                tvDate.text = movie?.release_date
-                rateBar.rating =
-                    ((movie?.vote_average?.toFloat()?.times(5))?.div(10)) ?: 0f
-                var genresMovie: String = ""
-                movie?.genres?.forEach {
-                    genresMovie += "${it.name}, "
-                }
-                tvGenres.text = genresMovie.substring(0, genresMovie.length - 2).plus(".")
-                tvResume.text = movie?.overview
-                var languagesMovie: String = ""
-                movie?.spoken_languages?.forEach {
-                    languagesMovie += "${it.english_name}, "
-                }
-                tvLanguages.text = languagesMovie.substring(0, languagesMovie.length - 2).plus(".")
-                tvHomepage.text = movie?.homepage
-                btnTrailer.setOnClickListener {
-                    Toast.makeText(this@MainActivity, "Go see the trailer", Toast.LENGTH_SHORT).show()
+                response.body().let {
+                    var genresMovie: String = ""
+                    var languagesMovie: String = ""
+                    loadImage(it?.poster_path ?: "", imagePoster)
+                    loadImage(it?.backdrop_path ?: "", imageBack, "H")
+                    tvTitle.text = it?.title
+                    tvDate.text = it?.release_date
+                    rateBar.rating =
+                        ((it?.vote_average?.toFloat()?.times(5))?.div(10)) ?: 0f
+                    it?.genres?.forEach { genre ->
+                        genresMovie += "${genre.name}, "
+                    }
+                    tvGenres.text = genresMovie.substring(0, genresMovie.length - 2).plus(".")
+                    tvResume.text = it?.overview
+                    it?.spoken_languages?.forEach { language ->
+                        languagesMovie += "${language.english_name}, "
+                    }
+                    tvLanguages.text =
+                        languagesMovie.substring(0, languagesMovie.length - 2).plus(".")
+                    tvHomepage.text = it?.homepage
+                    btnTrailer.setOnClickListener {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Go see the trailer",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
 
