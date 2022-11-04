@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
 
         this.overview.text = overview
-        this.releaseDate.text =  releaseDate
+        this.releaseDate.text =  "Release Date: $releaseDate"
         this.titulo.text = title
     }
 }

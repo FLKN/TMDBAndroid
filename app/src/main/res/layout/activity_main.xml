@@ -51,6 +51,7 @@
         android:layout_height="match_parent"
 
 
+        android:background="@color/black"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -70,13 +71,18 @@
                 android:numStars="10"
                 android:stepSize="0.2" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
             <TextView
                 android:id="@+id/tvOverview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 tools:text="esto es las descripcion de la pantalla donde se puesdfnsajdfnasjfnasdfjalsfjnasflasnfnlasfnjsjnlfsjnljgnjaslgnaflngjjngdjlkfgnlsdfngl djfgndsf ngsfdlg jsdnlfg lsdjfgn fdsjlkgnfd gljkfdglkdf ngldsfng jngfd slgnls" />
 
             <TextView
@@ -84,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 tools:text="ReleaseDate" />
 
