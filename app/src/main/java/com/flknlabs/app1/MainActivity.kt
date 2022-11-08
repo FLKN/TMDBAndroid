@@ -1,55 +1,69 @@
 package com.flknlabs.app1
 
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.ImageView
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
+const val audioUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
 
 class MainActivity : AppCompatActivity() {
-    lateinit var imageView: ImageView
+    lateinit var btnPlay: ImageButton
+    lateinit var btnPause: ImageButton
+    lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        imageView = findViewById<ImageView>(R.id.imgPoster)
+
+        btnPlay = findViewById<ImageButton>(R.id.btnPlay)
+        btnPause = findViewById<ImageButton>(R.id.btnPause)
+
+        mediaPlayer = MediaPlayer()
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+
+        btnPlay.setOnClickListener { playSong() }
+        btnPause.setOnClickListener { pauseSong() }
     }
 
-    override fun onResume() {
-        super.onResume()
-        request()
+    private fun playSong() {
+        try {
+            mediaPlayer.setDataSource(audioUrl)
+
+            mediaPlayer.prepare()
+
+            mediaPlayer.start()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        Toast.makeText(applicationContext, "Audio started playing..", Toast.LENGTH_SHORT).show()
     }
 
-    fun loadImage(imagePath: String) {
-        Glide
-            .with(this)
-            .load(IMAGE_BASE_URL + imagePath)
-            .placeholder(R.mipmap.ic_launcher_round)
-            .into(imageView)
+    private fun pauseSong() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.pause()
+            Toast.makeText(applicationContext, "Audio has been  paused..", Toast.LENGTH_SHORT).show()
+
+        } else {
+            Toast.makeText(applicationContext, "Audio not played..", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    fun request() {
-        val apiClient = ApiClient()
-        val call = apiClient.movieDatabaseAPI.getMovies(600, BuildConfig.API_KEY)
+    override fun onStop() {
+        super.onStop()
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
 
-        call.enqueue(object : Callback<BaseResponse> {
-            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                val json = Gson().toJson(response.body())
-                Log.d("MainActivity", "Response: $json")
-                loadImage(response.body()?.poster_path ?: "")
-            }
+            mediaPlayer.reset()
 
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("MainActivity","Error: ${t.stackTrace}}")
-                loadImage( "")
-            }
-        })
+            mediaPlayer.release()
+        } else {
+            Toast.makeText(applicationContext, "Audio not played..", Toast.LENGTH_SHORT).show()
+        }
     }
 }
 
