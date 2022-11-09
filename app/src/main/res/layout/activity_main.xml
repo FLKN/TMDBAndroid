@@ -5,12 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<<<<<<< Updated upstream
-    <ImageView
-        android:id="@+id/imgPoster"
-        android:layout_width="125dp"
-        android:layout_height="170dp"
-=======
     <com.google.android.exoplayer2.ui.StyledPlayerView
         android:id="@+id/exoPlayerView"
         android:layout_width="0dp"
@@ -19,7 +13,6 @@
         android:layout_marginTop="64dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="64dp"
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
