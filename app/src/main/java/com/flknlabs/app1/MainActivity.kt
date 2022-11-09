@@ -1,55 +1,129 @@
 package com.flknlabs.app1
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.google.gson.Gson
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.flknlabs.app1.behaviorals.*
+import com.flknlabs.app1.creationals.*
+import com.flknlabs.app1.structurals.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var imageView: ImageView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        imageView = findViewById<ImageView>(R.id.imgPoster)
+        /*println("---Singleton")
+        runSingleton()
+        println("---Factory")
+        runFactory()
+        println("---Builder")
+        runBuilder()
+        println("---Adapter")
+        runAdapter()
+        println("---Facade")
+        runFacade()
+        println("---Bridge")
+        runBridge()
+        println("---Iterator")
+        runIterator()
+        println("---Memento")
+        runMemento()*/
+        println("---Observer")
+        runObserver()
     }
 
-    override fun onResume() {
-        super.onResume()
-        request()
+    private fun runSingleton() {
+        Singleton.getInstance("").work()
     }
 
-    fun loadImage(imagePath: String) {
-        Glide
-            .with(this)
-            .load(IMAGE_BASE_URL + imagePath)
-            .placeholder(R.mipmap.ic_launcher_round)
-            .into(imageView)
+    private fun runFactory() {
+        val normal = Factory.getUser(UserType.Normal, "James", "Smith")
+        with(normal) {
+            println(getFullName())
+            println(status())
+            println("Show ads: ${showAds()}")
+        }
+
+        val premium = Factory.getUser(UserType.Premium, "Peter", "Brown")
+        with(premium) {
+            println(getFullName())
+            println(status())
+            println("Show ads: ${showAds()}")
+        }
     }
 
-    fun request() {
-        val apiClient = ApiClient()
-        val call = apiClient.movieDatabaseAPI.getMovies(600, BuildConfig.API_KEY)
+    private fun runBuilder() {
+        val dog = Builder()
+            .withAge(Age.PUPPY)
+            .withWeight(40.0)
+            .isSterilized(true)
+            .build()
 
-        call.enqueue(object : Callback<BaseResponse> {
-            override fun onResponse(call: Call<BaseResponse>, response: Response<BaseResponse>) {
-                val json = Gson().toJson(response.body())
-                Log.d("MainActivity", "Response: $json")
-                loadImage(response.body()?.poster_path ?: "")
-            }
+        println("${dog.name}'s diet should be: ${dog.calculateDiet()}")
+    }
 
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                Log.d("MainActivity","Error: ${t.stackTrace}}")
-                loadImage( "")
-            }
-        })
+    private fun runAdapter() {
+        val adaptee = AdapteeClass()
+        val adapteeData = adaptee.generateData()
+        val adapter = Adapter(TargetClass())
+        val convertedData = adapter.convertData(adapteeData)
+
+        println("${convertedData.size}")
+        println("${convertedData[1].index}")
+        println(convertedData[1].data)
+    }
+
+    private fun runFacade() {
+        val facade = Facade()
+        val data = ComplexSystemStoreData("John Doe", "5547174063")
+        facade.save(data)
+        val dataFound = facade.findFirst()
+
+        println("Found: ${dataFound.name} + ${dataFound.phone}")
+    }
+
+    private fun runBridge() {
+        val yellowWoodHouse = WoodBridge(color = Yellow())
+        yellowWoodHouse.show()
+        val yellowRockHouse = RockBridge(color = Yellow())
+        yellowRockHouse.show()
+        val redWoodHouse = WoodBridge(color = Red())
+        redWoodHouse.show()
+        val redRockHouse = RockBridge(color = Red())
+        redRockHouse.show()
+    }
+
+    private fun runIterator() {
+        val collection = ProductListCollection()
+        collection.add(Product(1, "Product 1"))
+        collection.add(Product(2, "Product 2"))
+        collection.add(Product(3, "Product 3"))
+
+        val iterator = collection.createIterator()
+
+        while (iterator.hasNext()){
+            val currentProduct = iterator.next()
+            println(currentProduct.toString())
+        }
+    }
+
+    private fun runMemento() {
+        val savedTimes: MutableList<Memento> = ArrayList()
+        val life = Life()
+
+        life.set("1000 B.C.")
+        savedTimes.add(life.saveToMemento())
+        life.set("1000 A.D.")
+        savedTimes.add(life.saveToMemento())
+        life.set("2000 A.D.")
+        savedTimes.add(life.saveToMemento())
+        life.set("4000 A.D.")
+        life.restoreFromMemento(savedTimes[0])
+    }
+
+    private fun runObserver() {
+        val observable = Observable(Observer())
+        observable.text = "Hello"
+        observable.text = "There"
     }
 }
 
