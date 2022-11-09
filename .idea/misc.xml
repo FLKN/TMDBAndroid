@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_signal_3.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable/ic_signal_5.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_calculator.xml" value="0.4031322505800464" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5656570434570313" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/custom_view.xml" value="0.9258560180664065" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.4444444444444444" />
         <entry key="app/src/main/res/layout/fragment_example.xml" value="0.1" />
